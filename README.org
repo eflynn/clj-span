@@ -1,4 +1,6 @@
-* About this Software
+* clj-span, SPAN models for Ecosystem Service Assessment
+
+[[https://travis-ci.org/lambdatronic/clj-span][https://api.travis-ci.org/lambdatronic/clj-span.png]]
 
 clj-span is an implementation of the Service Path Attribution Networks
 (Springer LNCS 2010 - Johnson et al.) framework for Ecosystem Service
@@ -9,7 +11,7 @@ simulation models (line-of-sight, proximity, carbon, flood-water,
 surface-water, sediment, coastal-storm-protection, and
 subsistence-fisheries) and visualize their results as map outputs.
 
-Copyright Gary W. Johnson (gjohnson@green-compass.org) 2009-2013
+Copyright Gary W. Johnson ([[mailto:gjohnson@green-compass.org][gjohnson@green-compass.org]]) 2009-2013
 
 * Usage
 
