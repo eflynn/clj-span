@@ -8,9 +8,7 @@ import es.unex.sextante.dataObjects.IRasterLayer;
 import es.unex.sextante.exceptions.GeoAlgorithmExecutionException;
 import es.unex.sextante.exceptions.RepeatedParameterNameException;
 
-public class MaxValueUphillAlgorithm
-         extends
-            GeoAlgorithm {
+public class MaxValueUphillAlgorithm extends GeoAlgorithm {
 
    private final static int    m_iOffsetX[] = { 0, 1, 1, 1, 0, -1, -1, -1 };
    private final static int    m_iOffsetY[] = { 1, 1, 0, -1, -1, -1, 0, 1 };
@@ -25,7 +23,6 @@ public class MaxValueUphillAlgorithm
    private IRasterLayer        m_Param      = null;
    private IRasterLayer        m_MaxValue;
 
-
    @Override
    public boolean processAlgorithm() throws GeoAlgorithmExecutionException {
 
@@ -33,7 +30,6 @@ public class MaxValueUphillAlgorithm
       m_Param = m_Parameters.getParameterValueAsRasterLayer(PARAM);
 
       m_MaxValue = getNewRasterLayer(RESULT, Sextante.getText("Max_value_uphill"), IRasterLayer.RASTER_DATA_TYPE_FLOAT);
-
 
       m_MaxValue.assign(NOT_VISITED);
 
@@ -50,13 +46,11 @@ public class MaxValueUphillAlgorithm
       calculateMaxValues();
 
       return !m_Task.isCanceled();
-
    }
 
 
    @Override
    public void defineCharacteristics() {
-
       setName(Sextante.getText("Max_value_uphill"));
       setGroup(Sextante.getText("Indices_and_other_hydrological_parameters"));
       setUserCanDefineAnalysisExtent(true);
@@ -69,23 +63,17 @@ public class MaxValueUphillAlgorithm
       catch (final RepeatedParameterNameException e) {
          Sextante.addErrorToLog(e);
       }
-
    }
 
-
    private void calculateMaxValues() {
-
       int x, y;
 
       for (y = 0; (y < m_iNY) && setProgress(y, m_iNY); y++) {
          for (x = 0; x < m_iNX; x++) {
             getMaxValue(x, y);
          }
-
       }
-
    }
-
 
    private void getMaxValue(final int x,
                             final int y) {
@@ -96,11 +84,9 @@ public class MaxValueUphillAlgorithm
       double dParamValue;
       double dMaxValue;
 
-
       if (m_Task.isCanceled()) {
          return;
       }
-
 
       if (m_MaxValue.getCellValueAsDouble(x, y) != NOT_VISITED) {
          return;
@@ -137,8 +123,5 @@ public class MaxValueUphillAlgorithm
       else {
          m_MaxValue.setNoData(x, y);
       }
-
-
    }
-
 }

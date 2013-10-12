@@ -7,10 +7,7 @@ import es.unex.sextante.dataObjects.IRasterLayer;
 import es.unex.sextante.exceptions.GeoAlgorithmExecutionException;
 import es.unex.sextante.exceptions.RepeatedParameterNameException;
 
-public class MeanValueUphillAlgorithm
-         extends
-            GeoAlgorithm {
-
+public class MeanValueUphillAlgorithm extends GeoAlgorithm {
    private final static int    m_iOffsetX[] = { 0, 1, 1, 1, 0, -1, -1, -1 };
    private final static int    m_iOffsetY[] = { 1, 1, 0, -1, -1, -1, 0, 1 };
    private static final double NOT_VISITED  = -1.0;
@@ -25,10 +22,8 @@ public class MeanValueUphillAlgorithm
    private IRasterLayer        m_AccFlow;
    private IRasterLayer        m_MeanValue;
 
-
    @Override
    public boolean processAlgorithm() throws GeoAlgorithmExecutionException {
-
       int x, y;
       int iCells;
       double dValue;
@@ -67,14 +62,11 @@ public class MeanValueUphillAlgorithm
          }
       }
 
-
       return !m_Task.isCanceled();
    }
 
-
    @Override
    public void defineCharacteristics() {
-
       setName(Sextante.getText("Mean_value_uphill"));
       setGroup(Sextante.getText("Indices_and_other_hydrological_parameters"));
       setUserCanDefineAnalysisExtent(true);
@@ -87,27 +79,20 @@ public class MeanValueUphillAlgorithm
       catch (final RepeatedParameterNameException e) {
          Sextante.addErrorToLog(e);
       }
-
    }
 
-
    private void calculateAccFlows() {
-
       int x, y;
 
       for (y = 0; (y < m_iNY) && setProgress(y, m_iNY); y++) {
          for (x = 0; x < m_iNX; x++) {
             getFlow(x, y);
          }
-
       }
-
    }
-
 
    private void getFlow(final int x,
                         final int y) {
-
       int i, ix, iy;
       int iDirection;
       double dValue;
@@ -147,8 +132,5 @@ public class MeanValueUphillAlgorithm
             }
          }
       }
-
-
    }
-
 }

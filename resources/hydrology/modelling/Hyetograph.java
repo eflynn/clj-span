@@ -97,23 +97,15 @@ public class Hyetograph {
 
    }
 
-
    public int getDuration() {
-
       return m_dRainfall.length * m_iTimeInterval;
-
    }
-
 
    public int getIntervals() {
-
       return m_dRainfall.length;
-
    }
 
-
    public void delay(final int iTime) {//in seconds
-
       final int iDelayIntervals = (int) ((double) iTime / (double) m_iTimeInterval);
       final double dRainfall[] = new double[m_dRainfall.length + iDelayIntervals];
 
@@ -121,26 +113,18 @@ public class Hyetograph {
          dRainfall[i + iDelayIntervals] = m_dRainfall[i];
       }
       m_dRainfall = dRainfall;
-
    }
 
 
    public int getTimeInterval() {
-
       return m_iTimeInterval;
-
    }
-
 
    public double[] getRainfallArray() {
-
       return m_dRainfall;
-
    }
 
-
    public double getAverageRainfallIntensity() {// in mm/s
-
       double dAverage = 0;
 
       for (int i = 0; i < m_dRainfall.length; i++) {
@@ -149,7 +133,6 @@ public class Hyetograph {
       dAverage = dAverage / (m_dRainfall.length * (float) m_iTimeInterval);
 
       return dAverage;
-
    }
 
 
@@ -158,7 +141,6 @@ public class Hyetograph {
                               final double dDuration) {// in s
 
       return (getRainfall(dInitTime, dDuration) / dDuration);
-
    }
 
 

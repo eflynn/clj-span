@@ -7,9 +7,7 @@ import es.unex.sextante.dataObjects.IRasterLayer;
 import es.unex.sextante.exceptions.GeoAlgorithmExecutionException;
 import es.unex.sextante.exceptions.RepeatedParameterNameException;
 
-public class StrahlerOrderAlgorithm
-         extends
-            GeoAlgorithm {
+public class StrahlerOrderAlgorithm extends GeoAlgorithm {
 
    private final static int   m_iOffsetX[] = { 0, 1, 1, 1, 0, -1, -1, -1 };
    private final static int   m_iOffsetY[] = { 1, 1, 0, -1, -1, -1, 0, 1 };
@@ -22,10 +20,8 @@ public class StrahlerOrderAlgorithm
    private IRasterLayer       m_DEM        = null;
    private IRasterLayer       m_Strahler;
 
-
    @Override
    public boolean processAlgorithm() throws GeoAlgorithmExecutionException {
-
       int x, y;
 
       m_DEM = m_Parameters.getParameterValueAsRasterLayer(DEM);
@@ -48,13 +44,10 @@ public class StrahlerOrderAlgorithm
       }
 
       return !m_Task.isCanceled();
-
    }
-
 
    @Override
    public void defineCharacteristics() {
-
       setName(Sextante.getText("Strahler_Order"));
       setGroup(Sextante.getText("Indices_and_other_hydrological_parameters"));
       setUserCanDefineAnalysisExtent(true);
@@ -66,13 +59,10 @@ public class StrahlerOrderAlgorithm
       catch (final RepeatedParameterNameException e) {
          Sextante.addErrorToLog(e);
       }
-
    }
-
 
    private void getStrahlerOrder(final int x,
                                  final int y) {
-
       int i;
       int ix, iy;
       int iDirection;
@@ -113,7 +103,5 @@ public class StrahlerOrderAlgorithm
       }
 
       //return iMaxOrder;
-
    }
-
 }

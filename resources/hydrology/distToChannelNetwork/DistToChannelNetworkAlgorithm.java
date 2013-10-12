@@ -11,10 +11,7 @@ import es.unex.sextante.exceptions.RepeatedParameterNameException;
 import es.unex.sextante.rasterWrappers.GridCell;
 import es.unex.sextante.rasterWrappers.GridWrapper;
 
-public class DistToChannelNetworkAlgorithm
-         extends
-            GeoAlgorithm {
-
+public class DistToChannelNetworkAlgorithm extends GeoAlgorithm {
    private final static int   m_iOffsetX[] = { 0, 1, 1, 1, 0, -1, -1, -1 };
    private final static int   m_iOffsetY[] = { 1, 1, 0, -1, -1, -1, 0, 1 };
 
@@ -23,14 +20,12 @@ public class DistToChannelNetworkAlgorithm
    public static final String DIST         = "DIST";
 
    private int                m_iNX, m_iNY;
-
    private IRasterLayer       m_DEM        = null;
    private IRasterLayer       m_Network    = null;
    private IRasterLayer       m_Dist;
    private IRasterLayer       m_Directions;
    private ArrayList          m_AdjPoints;
    private ArrayList          m_CentralPoints;
-
 
    @Override
    public boolean processAlgorithm() throws GeoAlgorithmExecutionException {

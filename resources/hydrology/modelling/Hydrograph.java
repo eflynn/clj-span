@@ -1,31 +1,22 @@
 package es.unex.sextante.hydrology.modelling;
 
 public class Hydrograph {
-
    protected double m_dFlow[];       // in m3
    protected int    m_iTimeInterval; // in seconds
    private String   m_sName;
 
-
    public Hydrograph(final int iInterval) {
-
       m_dFlow = new double[1];
       m_iTimeInterval = iInterval;
-
    }
-
 
    public Hydrograph(final double[] H,
                      final int iInterval) {
-
       m_dFlow = H;
       m_iTimeInterval = iInterval;
-
    }
 
-
    public void delay(final int iTime) {//in seconds
-
       int i;
       final int iDelayIntervals = (int) ((double) iTime / (double) m_iTimeInterval);
       final double dFlow[] = new double[m_dFlow.length + iDelayIntervals];
@@ -37,12 +28,9 @@ public class Hydrograph {
          dFlow[i + iDelayIntervals] = m_dFlow[i];
       }
       m_dFlow = dFlow;
-
    }
 
-
    public void add(final Hydrograph Hyd) {
-
       double dFlow1 = 0;
       double dFlow2 = 0;
 
@@ -67,18 +55,13 @@ public class Hydrograph {
          }
          m_dFlow = dFlow;
       }
-
    }
 
-
    public void add(final float fFlow) {
-
       for (int i = 0; i < m_dFlow.length; i++) {
          m_dFlow[i] += fFlow;
       }
-
    }
-
 
    /*public void MuskingumRouting(
            float fK,
@@ -139,30 +122,20 @@ public class Hydrograph {
    }// method*/
 
    public double getFlow(final int iTime) {
-
       final int iIndex = (int) ((double) iTime / (double) m_iTimeInterval);
 
       return m_dFlow[iIndex];
-
    }
-
 
    public int getTimeInterval() {
-
       return m_iTimeInterval;
-
    }
-
 
    public int getLengthInIntervals() {
-
       return m_dFlow.length;
-
    }
 
-
    public double getTotalRunoff() {// im m3
-
       double dRunoff = 0;
 
       for (int i = 0; i < m_dFlow.length - 1; i++) {
@@ -170,12 +143,9 @@ public class Hydrograph {
       }
 
       return dRunoff;
-
    }
 
-
    public double getPeak() {// in m3
-
       double dMax = Double.NEGATIVE_INFINITY;
 
       for (int i = 0; i < m_dFlow.length; i++) {
@@ -185,12 +155,9 @@ public class Hydrograph {
       }
 
       return dMax;
-
    }
 
-
    public int getPeakTime() {// in seconds
-
       double dMax = Double.NEGATIVE_INFINITY;
       int iMaxTime = 0;
 
@@ -202,16 +169,11 @@ public class Hydrograph {
       }
 
       return iMaxTime;
-
    }
-
 
    public double[] getFlowArray() {
-
       return m_dFlow;
-
    }
-
 
    /*public Pt[] getPtArray() {
 
@@ -226,17 +188,13 @@ public class Hydrograph {
    }// method*/
 
    public void multiply(final double fFactor) {
-
       for (int i = 0; i < m_dFlow.length; i++) {
          m_dFlow[i] *= fFactor;
       }
-
    }
-
 
    @Override
    public String toString() {
-
       final StringBuffer sb = new StringBuffer();
 
       sb.append("Caudal Punta : " + getPeak() + " m3/s\n");
@@ -245,32 +203,20 @@ public class Hydrograph {
       sb.append("Duración total del hidrograma : " + transformSecToHourMin(getLengthInIntervals() * m_iTimeInterval) + "\n");
 
       return sb.toString();
-
    }
 
-
    public static String transformSecToHourMin(final int iSec) {
-
       final int iHours = (int) ((double) iSec / 3600f);
       final int iMin = (int) ((double) (iSec - iHours * 3600) / 60.0);
 
       return new String(Integer.toString(iHours) + "h" + Integer.toString(iMin) + "min");
-
    }
-
 
    public void setName(final String sName) {
-
       m_sName = sName;
-
    }
-
 
    public String getName() {
-
       return m_sName;
-
    }
-
-
 }

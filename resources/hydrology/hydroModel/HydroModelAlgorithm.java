@@ -26,9 +26,7 @@ import es.unex.sextante.exceptions.UnsupportedOutputChannelException;
 import es.unex.sextante.hydrology.modelling.Hydrograph;
 import es.unex.sextante.hydrology.modelling.Hyetograph;
 
-public class HydroModelAlgorithm
-         extends
-            GeoAlgorithm {
+public class HydroModelAlgorithm extends GeoAlgorithm {
 
    public static final String TABLES               = "TABLES";
    public static final String TIMEOUT              = "TIMEOUT";
@@ -50,11 +48,8 @@ public class HydroModelAlgorithm
    private boolean            m_bHyetoNamesCreated = false;
    private String[]           m_sHyetoNames;
 
-
    @Override
    public boolean processAlgorithm() throws GeoAlgorithmExecutionException {
-
-
       m_TimeOut = m_Parameters.getParameterValueAsRasterLayer(TIMEOUT);
       m_CN = m_Parameters.getParameterValueAsRasterLayer(CN);
       m_iIntervalHydro = m_Parameters.getParameterValueAsInt(INTERVALHYDRO) * 60;
@@ -78,10 +73,8 @@ public class HydroModelAlgorithm
 
    }
 
-
    @Override
    public void defineCharacteristics() {
-
       setName(Sextante.getText("A_simple_hydrological_model"));
       setGroup(Sextante.getText("Indices_and_other_hydrological_parameters"));
       setUserCanDefineAnalysisExtent(false);
@@ -110,9 +103,7 @@ public class HydroModelAlgorithm
 
    }
 
-
    private boolean createHyetographs() {
-
       int iPoint = 0;
 
       try {
@@ -139,7 +130,6 @@ public class HydroModelAlgorithm
 
 
    private boolean checkHyetogramsConsistency() {
-
       try {
          final int iIntervals = m_Hyetogram[0][0].getIntervals();
          for (int i = 0; i < m_Hyetogram.length; i++) {
@@ -162,7 +152,6 @@ public class HydroModelAlgorithm
       }
 
    }
-
 
    private Hyetograph[] getHyetogramsFromTable(final double x,
                                                final double y,
@@ -219,9 +208,7 @@ public class HydroModelAlgorithm
 
    }
 
-
    private ITable getTableFromName(final String sName) {
-
       for (int i = 0; i < m_Tables.size(); i++) {
          final ITable table = (ITable) m_Tables.get(i);
          if (table.getName().equals(sName)) {
@@ -230,12 +217,9 @@ public class HydroModelAlgorithm
       }
 
       return null;
-
    }
 
-
    private void calculateHydrographs() throws UnsupportedOutputChannelException {
-
       int i, j, k;
       int x, y;
       int iLength;
@@ -266,9 +250,7 @@ public class HydroModelAlgorithm
       iRatio = m_iIntervalHyeto / m_iIntervalHydro;
       iIntervalsHydro = (int) ((iLength + m_TimeOut.getMaxValue() * 3600) / m_iIntervalHydro) + 1;
 
-
       for (i = 0; i < m_Hyetogram[0].length; i++) {//for each return period
-
          accRainGrid.assign(0.0);
          accRunoffGrid.assign(0.0);
          runoffGrid.assign(0.0);
@@ -326,11 +308,8 @@ public class HydroModelAlgorithm
          final Hydrograph hyd = new Hydrograph(hydData, m_iIntervalHydro);
          hyd.setName(m_Hyetogram[0][i].getName());
          m_Hydrographs.add(hyd);
-
       }
-
    }
-
 
    private double getRainfall(final int iSerie,
                               final Point2D pt,
@@ -352,9 +331,7 @@ public class HydroModelAlgorithm
 
    }
 
-
    private void documentHydrographs() throws UnsupportedOutputChannelException {
-
       int i, j;
       double flow[];
       Hydrograph hydro;
@@ -381,10 +358,8 @@ public class HydroModelAlgorithm
 
    }
 
-
    private double getRunoff(final double dRainfall, //in mm
                             final double dCN) {
-
       double dS;
       double dRunoff;
 
@@ -397,9 +372,7 @@ public class HydroModelAlgorithm
       dRunoff = Math.pow(dRainfall - 0.2 * dS, 2.0) / (dRainfall + 0.8 * dS);
 
       return dRunoff;
-
    }
-
 
    private void calculateRunoffGrid(final IRasterLayer runoff,
                                     final IRasterLayer rainfall) {
@@ -430,13 +403,8 @@ public class HydroModelAlgorithm
 
    }
 
-
    @Override
    public boolean isSuitableForModelling() {
-
       return false;
-
    }
-
-
 }

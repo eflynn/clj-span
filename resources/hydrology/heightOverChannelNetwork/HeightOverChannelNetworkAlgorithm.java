@@ -12,9 +12,7 @@ import es.unex.sextante.exceptions.RepeatedParameterNameException;
 import es.unex.sextante.gridTools.closeGaps.CloseGapsAlgorithm;
 import es.unex.sextante.rasterWrappers.GridWrapper;
 
-public class HeightOverChannelNetworkAlgorithm
-         extends
-            GeoAlgorithm {
+public class HeightOverChannelNetworkAlgorithm extends GeoAlgorithm {
 
    public static final String DEM        = "DEM";
    public static final String NETWORK    = "NETWORK";
@@ -22,16 +20,13 @@ public class HeightOverChannelNetworkAlgorithm
    public static final String THRESHOLD  = "THRESHOLD";
 
    private int                m_iNX, m_iNY;
-
    private IRasterLayer       m_DEM      = null;
    private IRasterLayer       m_Network  = null;
    private IRasterLayer       m_Diff;
    private double             m_dThreshold;
 
-
    @Override
    public boolean processAlgorithm() throws GeoAlgorithmExecutionException {
-
       m_DEM = m_Parameters.getParameterValueAsRasterLayer(DEM);
       m_Network = m_Parameters.getParameterValueAsRasterLayer(NETWORK);
       m_dThreshold = m_Parameters.getParameterValueAsDouble(THRESHOLD);
@@ -51,13 +46,11 @@ public class HeightOverChannelNetworkAlgorithm
       m_iNY = m_DEM.getNY();
 
       return interpolateSurfaceAndSubstract();
-
    }
 
 
    @Override
    public void defineCharacteristics() {
-
       setName(Sextante.getText("Elevation_over_channel_network"));
       setGroup(Sextante.getText("Indices_and_other_hydrological_parameters"));
       setUserCanDefineAnalysisExtent(true);
@@ -72,12 +65,10 @@ public class HeightOverChannelNetworkAlgorithm
       catch (final RepeatedParameterNameException e) {
          Sextante.addErrorToLog(e);
       }
-
    }
 
 
    private boolean interpolateSurfaceAndSubstract() throws GeoAlgorithmExecutionException {
-
       int x, y;
       double dValue, dValue2;
 

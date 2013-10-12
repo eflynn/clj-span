@@ -10,18 +10,13 @@ import es.unex.sextante.exceptions.RepeatedParameterNameException;
 import es.unex.sextante.hydrology.accFlow.AccFlowAlgorithm;
 import es.unex.sextante.outputs.Output;
 
-public class EdgeContaminationAlgorithm
-         extends
-            GeoAlgorithm {
-
+public class EdgeContaminationAlgorithm extends GeoAlgorithm {
    public static final String EDGECONT = "EDGECONT";
    public static final String DEM      = "DEM";
    private int                m_iNX, m_iNY;
 
-
    @Override
    public boolean processAlgorithm() throws GeoAlgorithmExecutionException {
-
       int x, y;
       IRasterLayer weights;
 
@@ -60,10 +55,8 @@ public class EdgeContaminationAlgorithm
       return !m_Task.isCanceled();
    }
 
-
    @Override
    public void defineCharacteristics() {
-
       setName(Sextante.getText("Edge_contamination"));
       setGroup(Sextante.getText("Indices_and_other_hydrological_parameters"));
       setUserCanDefineAnalysisExtent(false);
@@ -75,7 +68,5 @@ public class EdgeContaminationAlgorithm
       catch (final RepeatedParameterNameException e) {
          Sextante.addErrorToLog(e);
       }
-
    }
-
 }

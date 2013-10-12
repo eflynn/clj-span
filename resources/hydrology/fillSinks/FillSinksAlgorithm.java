@@ -8,10 +8,7 @@ import es.unex.sextante.dataObjects.IRasterLayer;
 import es.unex.sextante.exceptions.GeoAlgorithmExecutionException;
 import es.unex.sextante.exceptions.RepeatedParameterNameException;
 
-public class FillSinksAlgorithm
-         extends
-            GeoAlgorithm {
-
+public class FillSinksAlgorithm extends GeoAlgorithm {
    private final static int    m_iOffsetX[]   = { 0, 1, 1, 1, 0, -1, -1, -1 };
    private final static int    m_iOffsetY[]   = { 1, 1, 0, -1, -1, -1, 0, 1 };
    private final static double INIT_ELEVATION = 50000D;

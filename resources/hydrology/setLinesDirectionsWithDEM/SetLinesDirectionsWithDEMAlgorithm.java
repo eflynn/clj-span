@@ -21,10 +21,7 @@ import es.unex.sextante.exceptions.GeoAlgorithmExecutionException;
 import es.unex.sextante.exceptions.RepeatedParameterNameException;
 import es.unex.sextante.outputs.OutputVectorLayer;
 
-
-public class SetLinesDirectionsWithDEMAlgorithm
-         extends
-            GeoAlgorithm {
+public class SetLinesDirectionsWithDEMAlgorithm extends GeoAlgorithm {
 
    public static final String RESULT = "RESULT";
    public static final String LINES  = "LINES";
@@ -33,7 +30,6 @@ public class SetLinesDirectionsWithDEMAlgorithm
    private IVectorLayer       m_Output;
    private ArrayList          m_Lines;
    private IRasterLayer       m_DEM;
-
 
    @Override
    public void defineCharacteristics() {
@@ -53,10 +49,8 @@ public class SetLinesDirectionsWithDEMAlgorithm
 
    }
 
-
    @Override
    public boolean processAlgorithm() throws GeoAlgorithmExecutionException {
-
       m_DEM = m_Parameters.getParameterValueAsRasterLayer(DEM);
 
       final IVectorLayer lines = m_Parameters.getParameterValueAsVectorLayer(LINES);
@@ -89,13 +83,9 @@ public class SetLinesDirectionsWithDEMAlgorithm
       iter.close();
 
       return !m_Task.isCanceled();
-
    }
 
-
    private void addLine(final Geometry line) {
-
-
       final Coordinate[] coords = line.getCoordinates();
       final double z = m_DEM.getValueAt(coords[0].x, coords[0].y);
       final double z2 = m_DEM.getValueAt(coords[coords.length - 1].x, coords[coords.length - 1].y);
@@ -111,7 +101,6 @@ public class SetLinesDirectionsWithDEMAlgorithm
       else {
          m_Lines.add(line);
       }
-
    }
 
 

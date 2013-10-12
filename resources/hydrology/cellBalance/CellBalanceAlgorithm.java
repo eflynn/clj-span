@@ -1,6 +1,5 @@
 package es.unex.sextante.hydrology.cellBalance;
 
-
 import es.unex.sextante.additionalInfo.AdditionalInfoNumericalValue;
 import es.unex.sextante.core.GeoAlgorithm;
 import es.unex.sextante.core.AnalysisExtent;
@@ -9,10 +8,7 @@ import es.unex.sextante.dataObjects.IRasterLayer;
 import es.unex.sextante.exceptions.GeoAlgorithmExecutionException;
 import es.unex.sextante.exceptions.RepeatedParameterNameException;
 
-public class CellBalanceAlgorithm
-         extends
-            GeoAlgorithm {
-
+public class CellBalanceAlgorithm extends GeoAlgorithm {
    private static final double RAD_TO_DEG   = 180.0 / Math.PI;
    private final static int    m_iOffsetX[] = { 0, 1, 1, 1, 0, -1, -1, -1 };
    private final static int    m_iOffsetY[] = { 1, 1, 0, -1, -1, -1, 0, 1 };
@@ -31,10 +27,8 @@ public class CellBalanceAlgorithm
    private IRasterLayer        m_Weights    = null;
    private IRasterLayer        m_CellBalance;
 
-
    @Override
    public boolean processAlgorithm() throws GeoAlgorithmExecutionException {
-
       m_iMethod = m_Parameters.getParameterValueAsInt(METHOD);
       m_DEM = m_Parameters.getParameterValueAsRasterLayer(DEM);
       m_Weights = m_Parameters.getParameterValueAsRasterLayer(WEIGHTS);
@@ -55,10 +49,8 @@ public class CellBalanceAlgorithm
       return !m_Task.isCanceled();
    }
 
-
    @Override
    public void defineCharacteristics() {
-
       final String[] sMethod = { Sextante.getText("D8"), Sextante.getText("DInfinity"),
                Sextante.getText("MFD__Multiple_Flow_Directions") };
 
@@ -77,12 +69,9 @@ public class CellBalanceAlgorithm
       catch (final RepeatedParameterNameException e) {
          Sextante.addErrorToLog(e);
       }
-
    }
 
-
    private void calculateInFlows() {
-
       int x, y;
 
       for (y = 0; (y < m_iNY) && setProgress(y, m_iNY); y++) {
@@ -100,12 +89,9 @@ public class CellBalanceAlgorithm
             }
          }
       }
-
    }
 
-
    private void substractOutFlows() {
-
       int x, y;
       double dOut;
 
@@ -123,10 +109,8 @@ public class CellBalanceAlgorithm
 
    }
 
-
    private void doD8(final int x,
                      final int y) {
-
       int iDirection;
       double dWeight;
       int ix, iy;
@@ -143,10 +127,8 @@ public class CellBalanceAlgorithm
 
    }
 
-
    private void doDInf(final int x,
                        final int y) {
-
       int iDirection;
       double dWeight;
       double dAspect;
@@ -174,10 +156,8 @@ public class CellBalanceAlgorithm
 
    }
 
-
    private void doMFD(final int x,
                       final int y) {
-
       int i, ix, iy;
       double z, z2, dDifZ, dzSum;
       double Flow[];
@@ -211,5 +191,4 @@ public class CellBalanceAlgorithm
          }
       }
    }
-
 }

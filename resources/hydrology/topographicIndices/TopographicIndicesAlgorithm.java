@@ -7,9 +7,7 @@ import es.unex.sextante.dataObjects.IRasterLayer;
 import es.unex.sextante.exceptions.GeoAlgorithmExecutionException;
 import es.unex.sextante.exceptions.RepeatedParameterNameException;
 
-public class TopographicIndicesAlgorithm
-         extends
-            GeoAlgorithm {
+public class TopographicIndicesAlgorithm extends GeoAlgorithm {
 
    private static final double ALMOST_ZERO = 0.0011;
 
@@ -25,10 +23,8 @@ public class TopographicIndicesAlgorithm
    private IRasterLayer        m_StreamPowerIndex;
    private IRasterLayer        m_LSFactor;
 
-
    @Override
    public boolean processAlgorithm() throws GeoAlgorithmExecutionException {
-
       int x, y;
       int iNX, iNY;
 
@@ -59,7 +55,6 @@ public class TopographicIndicesAlgorithm
 
    @Override
    public void defineCharacteristics() {
-
       setName(Sextante.getText("Topographic_indices"));
       setGroup(Sextante.getText("Indices_and_other_hydrological_parameters"));
       setUserCanDefineAnalysisExtent(true);
@@ -74,9 +69,7 @@ public class TopographicIndicesAlgorithm
       catch (final RepeatedParameterNameException e) {
          Sextante.addErrorToLog(e);
       }
-
    }
-
 
    private void calculateIndices(final int x,
                                  final int y) {
@@ -96,7 +89,5 @@ public class TopographicIndicesAlgorithm
          m_StreamPowerIndex.setCellValue(x, y, dAccFlow * dSlope);
          m_LSFactor.setCellValue(x, y, (0.4 + 1) * Math.pow(dAccFlow / 22.13, 0.4) * Math.pow(Math.sin(dSlope) / 0.0896, 1.3));
       }
-
    }
-
 }

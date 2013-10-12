@@ -12,10 +12,7 @@ import es.unex.sextante.exceptions.GeoAlgorithmExecutionException;
 import es.unex.sextante.exceptions.RepeatedParameterNameException;
 import es.unex.sextante.rasterWrappers.GridCell;
 
-public class WatershedsAlgorithm
-         extends
-            GeoAlgorithm {
-
+public class WatershedsAlgorithm extends GeoAlgorithm {
    private static final int   NO_BASIN     = -1;
    private final static int   m_iOffsetX[] = { 0, 1, 1, 1, 0, -1, -1, -1 };
    private final static int   m_iOffsetY[] = { 1, 1, 0, -1, -1, -1, 0, 1 };
@@ -34,10 +31,8 @@ public class WatershedsAlgorithm
    private IRasterLayer       m_Basins;
    private IRasterLayer       m_Directions;
 
-
    @Override
    public boolean processAlgorithm() throws GeoAlgorithmExecutionException {
-
       m_DEM = m_Parameters.getParameterValueAsRasterLayer(DEM);
       m_Network = m_Parameters.getParameterValueAsRasterLayer(NETWORK);
       m_iMinSize = m_Parameters.getParameterValueAsInt(MINSIZE);
@@ -59,13 +54,10 @@ public class WatershedsAlgorithm
       calculateBasins();
 
       return !m_Task.isCanceled();
-
    }
-
 
    @Override
    public void defineCharacteristics() {
-
       setName(Sextante.getText("Watersheds"));
       setGroup(Sextante.getText("Basic_hydrological_analysis"));
       setUserCanDefineAnalysisExtent(true);
@@ -80,12 +72,9 @@ public class WatershedsAlgorithm
       catch (final RepeatedParameterNameException e) {
          Sextante.addErrorToLog(e);
       }
-
    }
 
-
    private void calculateBasins() {
-
       int i;
       int x, y;
       int iBasins;
@@ -106,12 +95,9 @@ public class WatershedsAlgorithm
             m_iBasins = iBasins;
          }
       }
-
    }
 
-
    private void prepareDirectionsLayer() {
-
       int x, y;
       int iDir;
 
@@ -126,12 +112,9 @@ public class WatershedsAlgorithm
             }
          }
       }
-
    }
 
-
    private ArrayList getOutlets() {
-
       int x, y;
       final ArrayList outlets = new ArrayList();
 
@@ -143,14 +126,11 @@ public class WatershedsAlgorithm
       }
 
       return outlets;
-
    }
-
 
    private void addOutlet(final int x,
                           final int y,
                           final ArrayList outlets) {
-
       int i;
       int ix, iy;
       int iUpslopeX = 0, iUpslopeY = 0;
@@ -199,19 +179,15 @@ public class WatershedsAlgorithm
             }
          }
       }
-
    }
-
 
    private int getBasin(final int x,
                         final int y) {
-
       int i, ix, iy, nCells = 1;
 
       final int iBasin = m_Basins.getCellValueAsInt(x, y);
       final int iDir = m_Directions.getCellValueAsInt(x, y);
       if ((iBasin == NO_BASIN) && !m_Directions.isNoDataValue(iDir)) {
-
          m_Basins.setCellValue(x, y, m_iBasins);
 
          for (i = 0, nCells = 1; i < 8; i++) {
@@ -223,8 +199,6 @@ public class WatershedsAlgorithm
          }
          return nCells;
       }
-
       return 0;
    }
-
 }

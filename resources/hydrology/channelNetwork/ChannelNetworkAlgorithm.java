@@ -19,10 +19,7 @@ import es.unex.sextante.exceptions.RepeatedParameterNameException;
 import es.unex.sextante.outputs.OutputVectorLayer;
 import es.unex.sextante.rasterWrappers.GridCell;
 
-public class ChannelNetworkAlgorithm
-         extends
-            GeoAlgorithm {
-
+public class ChannelNetworkAlgorithm extends GeoAlgorithm {
    private final static int   m_iOffsetX[]   = { 0, 1, 1, 1, 0, -1, -1, -1 };
    private final static int   m_iOffsetY[]   = { 1, 1, 0, -1, -1, -1, 0, 1 };
 

@@ -13,10 +13,7 @@ import es.unex.sextante.hydrology.accFlow.AccFlowAlgorithm;
 import es.unex.sextante.hydrology.watersheds.WatershedsAlgorithm;
 import es.unex.sextante.outputs.Output;
 
-public class WatershedsBySizeAlgorithm
-         extends
-            GeoAlgorithm {
-
+public class WatershedsBySizeAlgorithm extends GeoAlgorithm {
    public static final String WATERSHEDS   = "WATERSHEDS";
    public static final String SIZE         = "SIZE";
    public static final String DEM          = "DEM";
@@ -30,7 +27,6 @@ public class WatershedsBySizeAlgorithm
    private IRasterLayer       m_DEM        = null;
    private IRasterLayer       m_Outlets;
    private IRasterLayer       m_FlowAcc;
-
 
    @Override
    public void defineCharacteristics() {
@@ -49,13 +45,10 @@ public class WatershedsBySizeAlgorithm
       catch (final RepeatedParameterNameException e) {
          Sextante.addErrorToLog(e);
       }
-
    }
-
 
    @Override
    public boolean processAlgorithm() throws GeoAlgorithmExecutionException {
-
       m_DEM = m_Parameters.getParameterValueAsRasterLayer(DEM);
       m_DEM.setFullExtent();
 
@@ -81,12 +74,9 @@ public class WatershedsBySizeAlgorithm
       else {
          return calculateWatersheds();
       }
-
    }
 
-
    private boolean calculateWatersheds() throws GeoAlgorithmExecutionException {
-
       try {
          setProgress(0, 100);
          setProgressText("3/3");
@@ -110,18 +100,13 @@ public class WatershedsBySizeAlgorithm
          else {
             return false;
          }
-
-
       }
       catch (final Exception e) {
          throw new GeoAlgorithmExecutionException(e.getMessage());
       }
-
    }
 
-
    private boolean calculateAccFlow() throws GeoAlgorithmExecutionException {
-
       try {
          setProgressText("1/3");
          final AccFlowAlgorithm alg = new AccFlowAlgorithm();
@@ -147,9 +132,7 @@ public class WatershedsBySizeAlgorithm
 
    }
 
-
    private void calculateOutlets() {
-
       double dValue;
 
       setProgressText("2/3");
@@ -164,10 +147,8 @@ public class WatershedsBySizeAlgorithm
 
    }
 
-
    private void setOutlet(final int x,
                           final int y) {
-
       int i;
       int ix, iy;
       int iDirection;
@@ -193,7 +174,5 @@ public class WatershedsBySizeAlgorithm
             }
          }
       }
-
    }
-
 }

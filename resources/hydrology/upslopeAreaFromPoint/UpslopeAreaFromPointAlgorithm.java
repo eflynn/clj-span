@@ -1,5 +1,3 @@
-
-
 package es.unex.sextante.hydrology.upslopeAreaFromPoint;
 
 import java.awt.geom.Point2D;
@@ -12,10 +10,7 @@ import es.unex.sextante.exceptions.GeoAlgorithmExecutionException;
 import es.unex.sextante.exceptions.RepeatedParameterNameException;
 import es.unex.sextante.rasterWrappers.GridCell;
 
-
-public class UpslopeAreaFromPointAlgorithm
-         extends
-            GeoAlgorithm {
+public class UpslopeAreaFromPointAlgorithm extends GeoAlgorithm {
 
    private final static int   m_iOffsetX[] = { 0, 1, 1, 1, 0, -1, -1, -1 };
    private final static int   m_iOffsetY[] = { 1, 1, 0, -1, -1, -1, 0, 1 };
@@ -28,10 +23,8 @@ public class UpslopeAreaFromPointAlgorithm
    private IRasterLayer       m_Watershed;
    private GridCell           m_Outlet;
 
-
    @Override
    public boolean processAlgorithm() throws GeoAlgorithmExecutionException {
-
       m_DEM = m_Parameters.getParameterValueAsRasterLayer(DEM);
       final Point2D pt = m_Parameters.getParameterValueAsPoint(OUTLET);
 
@@ -48,13 +41,10 @@ public class UpslopeAreaFromPointAlgorithm
       m_Watershed.setNoDataValue(0.0);
 
       return true;
-
    }
-
 
    @Override
    public void defineCharacteristics() {
-
       setName(Sextante.getText("Upslope_area_from_a_single_point"));
       setGroup(Sextante.getText("Basic_hydrological_analysis"));
       setUserCanDefineAnalysisExtent(false);
@@ -68,20 +58,14 @@ public class UpslopeAreaFromPointAlgorithm
       catch (final RepeatedParameterNameException e) {
          Sextante.addErrorToLog(e);
       }
-
    }
-
 
    private void calculateWatershed() {
-
       writeCell(m_Outlet.getX(), m_Outlet.getY());
-
    }
-
 
    private void writeCell(final int iX,
                           final int iY) {
-
       int i;
       int ix, iy;
       int iDirection;
@@ -106,8 +90,6 @@ public class UpslopeAreaFromPointAlgorithm
                }
             }
          }
-
       }
-
    }
 }

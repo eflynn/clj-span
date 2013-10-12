@@ -1,6 +1,4 @@
-
-
-package es.unex.sextante.hydrology.createExclusionAreas;
+   package es.unex.sextante.hydrology.createExclusionAreas;
 
 import java.awt.Point;
 import java.awt.geom.Point2D;
@@ -13,11 +11,7 @@ import es.unex.sextante.exceptions.GeoAlgorithmExecutionException;
 import es.unex.sextante.exceptions.RepeatedParameterNameException;
 import es.unex.sextante.rasterWrappers.GridCell;
 
-
-public class CreateExclusionAreasAlgorithm
-         extends
-            GeoAlgorithm {
-
+public class CreateExclusionAreasAlgorithm extends GeoAlgorithm {
    private final static int   m_iOffsetX[] = { 0, 1, 1, 1, 0, -1, -1, -1 };
    private final static int   m_iOffsetY[] = { 1, 1, 0, -1, -1, -1, 0, 1 };
 
@@ -46,9 +40,7 @@ public class CreateExclusionAreasAlgorithm
       catch (final RepeatedParameterNameException e) {
          Sextante.addErrorToLog(e);
       }
-
    }
-
 
    @Override
    public boolean processAlgorithm() throws GeoAlgorithmExecutionException {
@@ -77,9 +69,7 @@ public class CreateExclusionAreasAlgorithm
       m_ExclusionAreas.setNoData(cell.getX(), cell.getY());
 
       return !m_Task.isCanceled();
-
    }
-
 
    private void exclude(int x,
                         int y) {
@@ -132,7 +122,5 @@ public class CreateExclusionAreasAlgorithm
       }
 
       m_ExclusionAreas.setNoData(x, y);
-
    }
-
 }

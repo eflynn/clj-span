@@ -11,9 +11,7 @@ import es.unex.sextante.exceptions.GeoAlgorithmExecutionException;
 import es.unex.sextante.exceptions.RepeatedParameterNameException;
 import es.unex.sextante.rasterWrappers.GridCell;
 
-public class IsocronesAlgorithm
-         extends
-            GeoAlgorithm {
+public class IsocronesAlgorithm extends GeoAlgorithm {
 
    private final static int   m_iOffsetX[] = { 0, 1, 1, 1, 0, -1, -1, -1 };
    private final static int   m_iOffsetY[] = { 1, 1, 0, -1, -1, -1, 0, 1 };
@@ -32,10 +30,8 @@ public class IsocronesAlgorithm
    private IRasterLayer       m_TimeOut;
    private GridCell           m_Outlet;
 
-
    @Override
    public boolean processAlgorithm() throws GeoAlgorithmExecutionException {
-
       m_DEM = m_Parameters.getParameterValueAsRasterLayer(DEM);
       m_Network = m_Parameters.getParameterValueAsRasterLayer(NETWORK);
       final Point2D pt = m_Parameters.getParameterValueAsPoint(OUTLET);
@@ -65,13 +61,10 @@ public class IsocronesAlgorithm
       m_TimeOut.setNoDataValue(0.0);
 
       return !m_Task.isCanceled();
-
    }
-
 
    @Override
    public void defineCharacteristics() {
-
       setName(Sextante.getText("Time_to_outlet"));
       setGroup(Sextante.getText("Basic_hydrological_analysis"));
       setUserCanDefineAnalysisExtent(false);
@@ -88,12 +81,9 @@ public class IsocronesAlgorithm
       catch (final RepeatedParameterNameException e) {
          Sextante.addErrorToLog(e);
       }
-
    }
 
-
    private void calculateTimeOfConcentration() {
-
       int x, y;
       double dValue;
       final GridCell highestCell = new GridCell(0, 0, Double.NEGATIVE_INFINITY);
@@ -120,15 +110,11 @@ public class IsocronesAlgorithm
 
    }
 
-
    private void calculateTimeOut() {
-
       m_TimeOut.assign(0.0);
 
       writeTimeOut(m_Outlet.getX(), m_Outlet.getY(), m_Outlet.getX(), m_Outlet.getY());
-
    }
-
 
    private void writeTimeOut(final int iX1,
                              final int iY1,
@@ -141,7 +127,6 @@ public class IsocronesAlgorithm
       double dDist = 1;
       double dTime;
       double dValue;
-
 
       if (m_Task.isCanceled()) {
          return;
@@ -184,8 +169,6 @@ public class IsocronesAlgorithm
                }
             }
          }
-
       }
-
    }
 }

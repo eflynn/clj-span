@@ -8,9 +8,7 @@ import es.unex.sextante.exceptions.GeoAlgorithmExecutionException;
 import es.unex.sextante.exceptions.RepeatedParameterNameException;
 import es.unex.sextante.rasterWrappers.GridWrapper;
 
-public class UpslopeAreaFromAreaAlgorithm
-         extends
-            GeoAlgorithm {
+public class UpslopeAreaFromAreaAlgorithm extends GeoAlgorithm {
 
    private final static int    m_iOffsetX[] = { 0, 1, 1, 1, 0, -1, -1, -1 };
    private final static int    m_iOffsetY[] = { 1, 1, 0, -1, -1, -1, 0, 1 };
@@ -27,13 +25,10 @@ public class UpslopeAreaFromAreaAlgorithm
    private IRasterLayer        m_InitZone   = null;
    private IRasterLayer        m_Result;
 
-
    @Override
    public boolean processAlgorithm() throws GeoAlgorithmExecutionException {
-
       m_DEM = m_Parameters.getParameterValueAsRasterLayer(DEM);
       m_InitZone = m_Parameters.getParameterValueAsRasterLayer(INITZONES);
-
 
       m_DEM.setFullExtent();
       final AnalysisExtent extent = m_DEM.getWindowGridExtent();
@@ -51,14 +46,10 @@ public class UpslopeAreaFromAreaAlgorithm
       m_Result.setNoDataValue(NOT_VISITED);
 
       return !m_Task.isCanceled();
-
    }
-
 
    @Override
    public void defineCharacteristics() {
-
-
       setName(Sextante.getText("Upslope_area_from_outlet_zone"));
       setGroup(Sextante.getText("Basic_hydrological_analysis"));
       setUserCanDefineAnalysisExtent(false);
@@ -74,12 +65,9 @@ public class UpslopeAreaFromAreaAlgorithm
       catch (final RepeatedParameterNameException e) {
          Sextante.addErrorToLog(e);
       }
-
    }
 
-
    private void calculateUpslopeArea() {
-
       int x, y;
       double dValue;
 
@@ -90,15 +78,11 @@ public class UpslopeAreaFromAreaAlgorithm
                calculateUpslopeAreaFromPoint(x, y);
             }
          }
-
       }
-
    }
-
 
    private void calculateUpslopeAreaFromPoint(final int x,
                                               final int y) {
-
       int i, ix, iy;
       double dValue;
       int iDirection;
@@ -126,7 +110,5 @@ public class UpslopeAreaFromAreaAlgorithm
             }
          }
       }
-
    }
-
 }

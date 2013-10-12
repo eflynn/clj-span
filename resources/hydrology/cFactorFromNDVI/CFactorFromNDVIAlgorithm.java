@@ -7,10 +7,7 @@ import es.unex.sextante.dataObjects.IRasterLayer;
 import es.unex.sextante.exceptions.GeoAlgorithmExecutionException;
 import es.unex.sextante.exceptions.RepeatedParameterNameException;
 
-public class CFactorFromNDVIAlgorithm
-         extends
-            GeoAlgorithm {
-
+public class CFactorFromNDVIAlgorithm extends GeoAlgorithm {
    public static final String ALPHA   = "ALPHA";
    public static final String BETA    = "BETA";
    public static final String NDVI    = "NDVI";
@@ -19,10 +16,8 @@ public class CFactorFromNDVIAlgorithm
    private IRasterLayer       m_NDVI  = null;
    private IRasterLayer       m_CFactor;
 
-
    @Override
    public boolean processAlgorithm() throws GeoAlgorithmExecutionException {
-
       int x, y;
       int iNX, iNY;
       double dNDVI;
@@ -50,14 +45,11 @@ public class CFactorFromNDVIAlgorithm
          }
       }
 
-
       return !m_Task.isCanceled();
    }
 
-
    @Override
    public void defineCharacteristics() {
-
       setName(Sextante.getText("C_factor_from_NDVI"));
       setGroup(Sextante.getText("Indices_and_other_hydrological_parameters"));
       setUserCanDefineAnalysisExtent(true);
@@ -71,7 +63,5 @@ public class CFactorFromNDVIAlgorithm
       catch (final RepeatedParameterNameException e) {
          Sextante.addErrorToLog(e);
       }
-
    }
-
 }

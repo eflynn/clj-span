@@ -1,6 +1,5 @@
 package es.unex.sextante.hydrology.accFlow;
 
-
 import es.unex.sextante.additionalInfo.AdditionalInfoNumericalValue;
 import es.unex.sextante.core.GeoAlgorithm;
 import es.unex.sextante.core.AnalysisExtent;
@@ -9,10 +8,7 @@ import es.unex.sextante.dataObjects.IRasterLayer;
 import es.unex.sextante.exceptions.GeoAlgorithmExecutionException;
 import es.unex.sextante.exceptions.RepeatedParameterNameException;
 
-public class AccFlowAlgorithm
-         extends
-            GeoAlgorithm {
-
+public class AccFlowAlgorithm extends GeoAlgorithm {
    private static final double NOT_VISITED  = -1.0;
 
    public static final String  FLOWACC      = "FLOWACC";
@@ -38,10 +34,8 @@ public class AccFlowAlgorithm
    private IRasterLayer        m_Weights    = null;
    private IRasterLayer        m_AccFlow;
 
-
    @Override
    public boolean processAlgorithm() throws GeoAlgorithmExecutionException {
-
       int i;
 
       m_iMethod = m_Parameters.getParameterValueAsInt(METHOD);
@@ -78,13 +72,10 @@ public class AccFlowAlgorithm
          m_AccFlow.multiply(m_AccFlow.getWindowCellSize() * m_AccFlow.getWindowCellSize());
          return true;
       }
-
    }
-
 
    @Override
    public void defineCharacteristics() {
-
       final String[] sMethod = { Sextante.getText("D8"), Sextante.getText("Rho8"), Sextante.getText("DInfinity"),
                Sextante.getText("MFD__Multiple_Flow_Directions") };
 
@@ -104,12 +95,9 @@ public class AccFlowAlgorithm
       catch (final RepeatedParameterNameException e) {
          Sextante.addErrorToLog(e);
       }
-
    }
 
-
    private void calculateFlows() {
-
       int x, y;
 
       for (y = 0; (y < m_iNY) && setProgress(y, m_iNY); y++) {
@@ -130,27 +118,20 @@ public class AccFlowAlgorithm
             }
          }
       }
-
    }
 
-
    private void calculateAccFlows() {
-
       int x, y;
 
       for (y = 0; (y < m_iNY) && setProgress(y, m_iNY); y++) {
          for (x = 0; x < m_iNX; x++) {
             getFlow(x, y);
          }
-
       }
-
    }
-
 
    private void getFlow(final int x,
                         final int y) {
-
       int i, ix, iy, j;
       double dFlow;
       double dValue, dValue2;
@@ -185,14 +166,10 @@ public class AccFlowAlgorithm
             }
          }
       }
-
-
    }
-
 
    private void doD8(final int x,
                      final int y) {
-
       int iDirection;
 
       iDirection = m_DEM.getDirToNextDownslopeCell(x, y);
@@ -200,13 +177,10 @@ public class AccFlowAlgorithm
       if (iDirection >= 0) {
          m_Flow[iDirection % 8].setCellValue(x, y, 1.0f);
       }
-
    }
-
 
    private void doRho8(final int x,
                        final int y) {
-
       int iDirection;
       double dAspect;
 
@@ -223,9 +197,7 @@ public class AccFlowAlgorithm
 
          m_Flow[iDirection].setCellValue(x, y, 1.0f);
       }
-
    }
-
 
    private void doDInf(final int x,
                        final int y) {
@@ -245,10 +217,8 @@ public class AccFlowAlgorithm
 
    }
 
-
    private void doMFD(final int x,
                       final int y) {
-
       int i, ix, iy;
       double z, z2, dDifZ, dzSum;
       double dFlow;
@@ -278,7 +248,5 @@ public class AccFlowAlgorithm
             }
          }
       }
-
    }
-
 }

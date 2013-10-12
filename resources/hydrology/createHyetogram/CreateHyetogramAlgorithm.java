@@ -12,10 +12,7 @@ import es.unex.sextante.exceptions.RepeatedParameterNameException;
 import es.unex.sextante.exceptions.UnsupportedOutputChannelException;
 import es.unex.sextante.hydrology.modelling.Hyetograph;
 
-public class CreateHyetogramAlgorithm
-         extends
-            GeoAlgorithm {
-
+public class CreateHyetogramAlgorithm extends GeoAlgorithm {
    public static final String RETURNS          = "RETURNS";
    public static final String HYETOGRAPHLENGTH = "HYETOGRAPHLENGTH";
    public static final String TIMETOPEAK       = "TIMETOPEAK";
@@ -32,10 +29,8 @@ public class CreateHyetogramAlgorithm
    private double             m_dMean;
    private double             m_dStdDev;
 
-
    @Override
    public boolean processAlgorithm() throws GeoAlgorithmExecutionException {
-
       m_iInterval = m_Parameters.getParameterValueAsInt(INTERVAL) * 60;
       m_iHyetoLength = m_Parameters.getParameterValueAsInt(HYETOGRAPHLENGTH) * 60;
       m_iPeakTime = m_Parameters.getParameterValueAsInt(TIMETOPEAK) * 60;
@@ -59,9 +54,7 @@ public class CreateHyetogramAlgorithm
       return true;
    }
 
-
    private void createTable() throws UnsupportedOutputChannelException {
-
       int i, j;
       int iReturn;
       final String sFields[] = new String[m_Returns.size() + 1];
@@ -94,9 +87,7 @@ public class CreateHyetogramAlgorithm
 
    }
 
-
    private Hyetograph getHyetograph(final int iReturn) {
-
       final double dAlpha = Math.sqrt(Math.pow(3.141592, 2.0) / 6.0 / m_dStdDev);
       final double dMu = m_dMean - (0.5772 / dAlpha);
 
@@ -105,13 +96,10 @@ public class CreateHyetogramAlgorithm
       dP24 = dP24 / dAlpha + dMu;
 
       return new Hyetograph(dP24, m_iHyetoLength, m_iInterval, m_iPeakTime, iReturn, m_iRatioI1);
-
    }
-
 
    @Override
    public void defineCharacteristics() {
-
       setName(Sextante.getText("Create_synthetic_hyetograph"));
       setGroup(Sextante.getText("Indices_and_other_hydrological_parameters"));
       setUserCanDefineAnalysisExtent(false);
@@ -133,7 +121,5 @@ public class CreateHyetogramAlgorithm
       catch (final RepeatedParameterNameException e) {
          Sextante.addErrorToLog(e);
       }
-
    }
-
 }

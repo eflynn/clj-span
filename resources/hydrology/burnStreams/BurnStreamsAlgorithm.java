@@ -1,5 +1,3 @@
-
-
 package es.unex.sextante.hydrology.burnStreams;
 
 import com.vividsolutions.jts.geom.Coordinate;
@@ -17,11 +15,7 @@ import es.unex.sextante.exceptions.GeoAlgorithmExecutionException;
 import es.unex.sextante.exceptions.RepeatedParameterNameException;
 import es.unex.sextante.rasterWrappers.GridCell;
 
-
-public class BurnStreamsAlgorithm
-         extends
-            GeoAlgorithm {
-
+public class BurnStreamsAlgorithm extends GeoAlgorithm {
    public static final String  STREAMS          = "STREAMS";
    public static final String  DEM              = "DEM";
    public static final String  RESULT           = "RESULT";
@@ -35,10 +29,8 @@ public class BurnStreamsAlgorithm
    private double              m_dDepth;
    private boolean             m_bFoundValidCell;
 
-
    @Override
    public boolean processAlgorithm() throws GeoAlgorithmExecutionException {
-
       m_dDepth = m_Parameters.getParameterValueAsDouble(DEPTH);
 
       final IVectorLayer lines = m_Parameters.getParameterValueAsVectorLayer(STREAMS);
@@ -67,10 +59,8 @@ public class BurnStreamsAlgorithm
 
    }
 
-
    @Override
    public void defineCharacteristics() {
-
       setName(Sextante.getText("Burn_streams"));
       setGroup(Sextante.getText("Basic_hydrological_analysis"));
       setUserCanDefineAnalysisExtent(false);
@@ -85,12 +75,9 @@ public class BurnStreamsAlgorithm
       catch (final RepeatedParameterNameException e) {
          Sextante.addErrorToLog(e);
       }
-
    }
 
-
    private void processLine(final Geometry line) {
-
       double x, y, x2, y2;
       final Coordinate[] coords = line.getCoordinates();
 
@@ -102,15 +89,12 @@ public class BurnStreamsAlgorithm
          y2 = coords[i + 1].y;
          processSegment(x, y, x2, y2);
       }
-
    }
-
 
    private void processSegment(double x,
                                double y,
                                final double x2,
                                final double y2) {
-
 
       double dx, dy, d, n;
 
@@ -143,13 +127,10 @@ public class BurnStreamsAlgorithm
             addPoint(x, y);
          }
       }
-
    }
-
 
    private void addPoint(final double x,
                          final double y) {
-
 
       final GridCell cell = m_DEM.getWindowGridExtent().getGridCoordsFromWorldCoords(x, y);
       final int iX = cell.getX();
@@ -167,6 +148,5 @@ public class BurnStreamsAlgorithm
       //}
 
       m_Result.setCellValue(iX, iY, m_dLastZ);
-
    }
 }
